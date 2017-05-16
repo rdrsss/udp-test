@@ -1,0 +1,12 @@
+# Vim
+*.swp
+*.swo
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+
+# project dirs
+build
