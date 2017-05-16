@@ -37,6 +37,10 @@ bool server::init() {
 }
 
 bool server::cleanup() {
+	if (close(sock_) == -1) {
+		// TODO :: log error
+		return false;
+	}
 
 	return true;
 }
