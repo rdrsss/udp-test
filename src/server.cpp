@@ -46,11 +46,26 @@ bool server::cleanup() {
 }
 
 
-bool server::receive(char* buf, unsigned int buf_len) {
+bool server::receive(recvbuf* out) {
 	if (sock_ == -1) 
 		return false;
 
+	if (out == nullptr) 
+		return false;
 
+	memset(out->buf, 0, BUFSIZE);
+
+	sockaddr_in incoming;
+	unsigned int size = sizeof(incoming);
+	if(recvfrom(
+			sock_,
+			out->buf,
+			BUFSIZE,
+			MSG_DONTWAIT, // make it non-blocking
+			reinterpret_cast<sockaddr*>(&incoming),
+			&size) == -1) {
+		return false;
+	}
 	
 	return true;
 }

@@ -4,7 +4,7 @@
 
 
 TEST(CreateServerTest, InitAndCleanup) {
-	auto s = udp::server(6669, 512);
+	auto s = udp::server(6669);
 
 	EXPECT_EQ(true, s.init());
 	EXPECT_EQ(true, s.cleanup());

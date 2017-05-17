@@ -4,13 +4,19 @@
 
 namespace udp {
 
+#define BUFSIZE 512
+
 class server { 
 public:
+
+	struct recvbuf {
+		char buf[BUFSIZE];
+	};
+
 	explicit server(
-			unsigned int listen_port, 
-			unsigned int buf_len) : 
+			unsigned int listen_port)
+		:
 		listen_port_(listen_port)
-		,buffer_len_(buf_len)
 		,sock_(-1)
    	{}
 
@@ -18,12 +24,11 @@ public:
 	bool init();
 	bool cleanup();
 
-	bool receive(char* buf, unsigned int buf_len);
+	bool receive(recvbuf* out);
 
 
 private:
 	unsigned int listen_port_;  // Port to listen on 
-	unsigned int buffer_len_;	// Buffer length to receive on.
 
 	int sock_;					// Fd to socket created.
 
