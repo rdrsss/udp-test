@@ -10,7 +10,9 @@ class server {
 public:
 
 	struct recvbuf {
-		char buf[BUFSIZE];
+		char			buf[BUFSIZE];
+		char			addr[128];
+		unsigned int	port;
 	};
 
 	explicit server(

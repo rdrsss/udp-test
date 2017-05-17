@@ -66,6 +66,9 @@ bool server::receive(recvbuf* out) {
 			&size) == -1) {
 		return false;
 	}
+
+	memcpy(out->addr, inet_ntoa(incoming.sin_addr), sizeof(out->addr));
+	out->port = ntohs(incoming.sin_port);
 	
 	return true;
 }
